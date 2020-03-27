@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import PageContainer from './containers/PageContainer';
-import ShipmentScreen from './containers/ShipmentScreen';
+const RedirectScreen = lazy(() => import('./containers/RedirectScreen'));
+const ShipmentScreen = lazy(() => import('./containers/ShipmentScreen'));
+const ShipmentDetailsScreen = lazy(() => import('./containers/ShipmentDetailsScreen'));
 
 function App() {
   return (
@@ -11,12 +14,16 @@ function App() {
         <Route
           render={() => (
             <PageContainer>
-              <Switch>
-                <Route exact path="/" component={ShipmentScreen} />
-              </Switch>
+              <Suspense fallback={<CircularProgress />}>
+                <Switch>
+                  <Route exact path="/" component={RedirectScreen} />
+                  <Route exact path="/shipments" component={ShipmentScreen} />
+                  <Route exact path="/shipments/:id" component={ShipmentDetailsScreen} />
+                </Switch>
+              </Suspense>
             </PageContainer>
           )}>
-        </Route> 
+        </Route>
       </Switch>
     </BrowserRouter>
   );
