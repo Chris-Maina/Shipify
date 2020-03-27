@@ -1,51 +1,68 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
-import styles from './styles';
-import ShipmentDetails from './components/ShipmentDetails'
+import Table from '@material-ui/core/Table';
+import TableRow from '@material-ui/core/TableRow';
 import TextField from '@material-ui/core/TextField';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import { makeStyles } from '@material-ui/core/styles';
 
-const Content = ({ shipments, selectedShipment, handleShipmentClick, updateShipment, handleBackClick, handleChange, searchTerm }) => {
+import styles from './styles';
+
+const useStyles = makeStyles(styles);
+const Content = ({ shipments, handleShipmentClick, handleChange, searchTerm }) => {
+  const classes = useStyles();
   if (!shipments) {
-    return null;
+    return (<Paper><div>There are no shipments</div></Paper>);
   }
 
-  if(selectedShipment && Object.keys(selectedShipment).length) {
-    return(
-      <ShipmentDetails
-        handleBackClick={handleBackClick}
-        updateShipment={updateShipment}
-        shipment={selectedShipment}
-      />
-    )
-  } else {
-
-    return (
-      <div style={styles.container}>
-        <div style={styles.titleWrapper}>
-          <div style={styles.title}>Shipments</div>
-          <TextField
-            value={searchTerm}
-            name='searchTerm'
-            onChange={handleChange}
-            placeholder='Search shipment id'
-            variant='outlined'
-            style={styles.searchField}
-          />
-        </div>
-        <div style={styles.shipmentWrapper}>
-          {
-            shipments.map(shipment => (
-              <Paper key={shipment.id} style={styles.card} onClick={() => handleShipmentClick(shipment)}>
-                <p>Name: {shipment.name}</p>
-                <p>Destination: {shipment.destination}</p>
-                <p>Status: {shipment.status}</p>
-              </Paper>
-            ))
-          }
-        </div>
+  return (
+    <div style={styles.container}>
+      <div className={classes.titleWrapper}>
+        <div style={styles.title}>Shipments</div>
+        <TextField
+          value={searchTerm}
+          name='searchTerm'
+          onChange={handleChange}
+          placeholder='Search shipment id'
+          variant='outlined'
+          className={classes.inputRoot}
+        />
       </div>
-    )
-  }
+      <Paper>
+
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell style={styles.tableHead}>ID</TableCell>
+              <TableCell style={styles.tableHead}>Name</TableCell>
+              <TableCell style={styles.tableHead}>Origin</TableCell>
+              <TableCell style={styles.tableHead}>Destination</TableCell>
+              <TableCell style={styles.tableHead}>Mode</TableCell>
+              <TableCell style={styles.tableHead}>Total</TableCell>
+              <TableCell style={styles.tableHead}>Status</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {
+              shipments.map(shipment => (
+                <TableRow key={shipment.id} className={classes.tableRow} onClick={() => handleShipmentClick(shipment.id)}>
+                  <TableCell>{shipment.id}</TableCell>
+                  <TableCell>{shipment.name}</TableCell>
+                  <TableCell>{shipment.origin}</TableCell>
+                  <TableCell>{shipment.destination}</TableCell>
+                  <TableCell>{shipment.mode}</TableCell>
+                  <TableCell>{shipment.total}</TableCell>
+                  <TableCell style={styles[shipment.status.toLowerCase()]}>{shipment.status}</TableCell>
+                </TableRow>
+              ))
+            }
+          </TableBody>
+        </Table>
+      </Paper>
+    </div>
+  )
 }
 
 export default Content;

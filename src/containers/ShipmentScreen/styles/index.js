@@ -1,7 +1,25 @@
 const styles = {
   container: {
-    // padding: '40px 60px',
-    height: '100vh',
+    paddingLeft: 20,
+  },
+  titleWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
+  inputRoot: {
+    'input': {
+      fontSize: '14px',
+      ouline: 'none',
+      padding: '14px 10px',
+      backgroundColor: '#fff',
+      boxSizing: 'border-box'
+    }
+  },
+  searchField: {
+    fontSize: '14px',
+    marginLeft: 'auto'
   },
   title: {
     fontWeight: 700,
@@ -13,17 +31,28 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gridColumnGap: 15,
-    gridRowGap: 15
+    gridRowGap: 15,
+    fontSize: 14,
   },
-  card: {
-    padding: 10,
+  tableHead: {
+    fontWeight: 700,
+    fontSize: 16,
+    color: 'unset'
   },
-  titleWrapper: {
-    display: 'flex',
+  tableRow: {
+    cursor: 'pointer',
+    '&:hover': {
+      backgroundColor: '#DCDCDC',
+    }
   },
-  searchField: {
-    fontSize: '14px',
-    marginLeft: 'auto'
+  text: {
+    margin: '8px 0'
+  },
+  completed: {
+    color: 'blue'
+  },
+  active: {
+    color: 'green'
   }
 }
 

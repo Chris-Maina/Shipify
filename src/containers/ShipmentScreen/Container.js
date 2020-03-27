@@ -5,7 +5,6 @@ import { search } from './helpers';
 
 class ShipmentScreen extends Component {
   state = {
-    selectedShipment: {},
     searchTerm: '',
   }
   componentDidMount() {
@@ -18,26 +17,21 @@ class ShipmentScreen extends Component {
     this.setState({ [name]: value });
   }
 
-  handleShipmentClick = (shipment) => {
-    this.setState({ selectedShipment: shipment });
+  handleShipmentClick = shipmentId => {
+    const { history } = this.props;
+    history.push(`shipments/${shipmentId}`)
   }  
 
-  handleBackClick = () => {
-    this.setState({ selectedShipment: {} });
-  }
   
   render() {
-    const { shipments, updateShipment } = this.props;
-    const { selectedShipment, searchTerm } = this.state;
+    const { shipments } = this.props;
+    const { searchTerm } = this.state;
     return(
       <Content
         searchTerm={searchTerm}
         handleChange={this.handleChange}
-        updateShipment={updateShipment}
-        selectedShipment={selectedShipment}
-        handleBackClick={this.handleBackClick}
-        handleShipmentClick={this.handleShipmentClick}
         shipments={search(searchTerm, shipments)}
+        handleShipmentClick={this.handleShipmentClick}
       />
     )
   }

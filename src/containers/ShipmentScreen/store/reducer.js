@@ -14,12 +14,6 @@ const shipmentReducer = (state=initialState, { type, payload }) => {
         loading: false,
         shipments: payload.shipments
       };
-    case ACTION_TYPES.UPDATE_SHIPMENTS_SUCCESS: 
-      return {
-        ...state,
-        loading: false,
-        shipments: state.shipments.map(item => item.id === payload.shipment.id ? payload.shipment: item)
-      }
     default:
       return state;
   }
