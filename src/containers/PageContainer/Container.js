@@ -1,13 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import Content from './Content';
 
-class PageContainer extends Component {
-  render() {
-    return (
-      <Content {...this.props} />
-    );
-  }
-}
+const PageContainer = props => (
+  <Content {...props} />
+);
 
 export default PageContainer;

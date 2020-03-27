@@ -59,9 +59,7 @@ class Content extends Component {
             >
               <MenuIcon />
             </IconButton>
-            <div>
-              Shipify
-            </div>
+            <h3>SHIPIFY</h3>
           </Toolbar>
         </AppBar>
         <Drawer
@@ -85,17 +83,17 @@ class Content extends Component {
           </div>
           <Divider />
           <List>
-                <Link to='/' >
-                  <ListItem>
-                    <ListItemIcon><LanguageIcon /></ListItemIcon>
-                    <ListItemText primary="View Shipments" />
-                  </ListItem>
-                </Link>
+            <Link to='/shipments' >
+              <ListItem>
+                <ListItemIcon><LanguageIcon /></ListItemIcon>
+                <ListItemText primary="View Shipments" />
+              </ListItem>
+            </Link>
           </List>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
-          <div>{this.props.children}</div>
+          <div className={classes.pageContent}>{this.props.children}</div>
         </main>
       </div>
     )

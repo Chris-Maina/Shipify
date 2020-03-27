@@ -1,7 +1,9 @@
 const drawerWidth = 240;
 const styles = theme => ({
   root: {
-    display: 'flex'
+    display: 'flex',
+    minHeight: '100vh',
+    margin: '0 auto',
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
@@ -48,8 +50,10 @@ const styles = theme => ({
     },
   },
   content: {
+    display: 'flex',
     flexGrow: 1,
     background: '#f1f3f6',
+    flexDirection: 'column',
     padding: theme.spacing(3),
   },
   toolbar: {
@@ -59,6 +63,11 @@ const styles = theme => ({
     padding: '0 8px',
     ...theme.mixins.toolbar,
   },
+  pageContent: {
+    flexGrow: 1,
+    flexShrink: 1,
+    flexBasis: '0%'
+  }
 });
 
 export default styles;
