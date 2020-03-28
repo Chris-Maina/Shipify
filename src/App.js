@@ -14,7 +14,7 @@ function App() {
         <Route
           render={() => (
             <PageContainer>
-              <Suspense fallback={<CircularProgress />}>
+              <Suspense fallback={<CircularProgress style={{ margin: '0 auto', display: 'table', lineHeight: 40 }} />}>
                 <Switch>
                   <Route exact path="/" component={RedirectScreen} />
                   <Route exact path="/shipments" component={ShipmentScreen} />

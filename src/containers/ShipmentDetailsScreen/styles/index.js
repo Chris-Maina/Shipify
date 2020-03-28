@@ -1,6 +1,6 @@
 const styles = {
   container: {
-    height: '100vh',
+    paddingLeft: 20,
     fontSize: 14,
   },
   titleWrapper: {
