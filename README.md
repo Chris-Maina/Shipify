@@ -19,3 +19,4 @@ To get started with the server follow instructions from [FreightHub Challenge](h
 
 - Route based code splitting
 - Precaching by registering CRA service worker. Apart from app loading faster, enables it to be accessible in offline mode
+- (Optional) Pre-render routes with [react-snap](https://github.com/stereobooster/react-snap). The package pre-renders your site into static HTML files. This improves `First Paint` times of an application.

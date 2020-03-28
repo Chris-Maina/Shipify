@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import clsx from 'clsx';
 import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom';
@@ -19,7 +19,7 @@ import ListItem from '@material-ui/core/ListItem';
 
 import styles from './styles';
 
-class Content extends Component {
+class Content extends PureComponent {
   static propTypes = {
     classes: PropTypes.shape({}),
   }
