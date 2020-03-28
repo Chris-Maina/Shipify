@@ -1,5 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { createMuiTheme } from '@material-ui/core/styles';
+import ThemeProvider from '@material-ui/styles/ThemeProvider';
+
 import './index.css';
 import App from './App';
 import configureStore from './store';
@@ -8,6 +11,17 @@ import * as serviceWorker from './serviceWorker';
 
 const store = configureStore({});
 
+const theme = createMuiTheme({
+  typography: {
+    fontFamily: [
+      'Lato',
+      'Roboto',
+      'Helvetica Neue',
+      'Arial',
+      'sans-serif'
+    ].join(',')
+  }
+});
 /**
  * With react-snap installed, you'll check if there are child nodes to determine
  * whether HTML contents were pre-rendered (or rendered on the server).
@@ -16,16 +30,20 @@ const store = configureStore({});
 const rootElement = document.getElementById('root');
 if (rootElement.hasChildNodes()) {
   ReactDOM.hydrate(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>,
     rootElement
   );
 } else {
   ReactDOM.render(
-    <Provider store={store}>
-      <App />
-    </Provider>,
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>,
     rootElement
   );
 }
