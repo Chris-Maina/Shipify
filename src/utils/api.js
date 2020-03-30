@@ -27,6 +27,21 @@ export const get = async (path) => {
   }
 };
 
+export const post = async (path, data) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/${path}`, {
+      headers,
+      method: 'POST',
+      body: JSON.stringify(data),
+    });
+    const valid = checkStatus(response);
+    const result = await valid.json();
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
 export const edit = async (path, data) => {
   try {
     const response = await fetch(`${API_BASE_URL}/${path}`, {
