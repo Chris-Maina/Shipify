@@ -60,6 +60,9 @@ const styles = makeStyles(theme => ({
   },
   active: {
     color: 'green'
+  },
+  mode: {
+    textTransform: 'capitalize'
   }
 }))
 

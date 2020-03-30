@@ -88,7 +88,7 @@ const Content = ({
                   <TableCell>{item.name}</TableCell>
                   <TableCell>{item.origin}</TableCell>
                   <TableCell>{item.destination}</TableCell>
-                  <TableCell>{item.mode}</TableCell>
+                  <TableCell className={classes.mode}>{item.mode}</TableCell>
                   <TableCell>{item.total}</TableCell>
                   <TableCell className={classes[item.status.toLowerCase()]}>{item.status}</TableCell>
                 </TableRow>
