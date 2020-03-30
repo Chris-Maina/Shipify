@@ -5,7 +5,7 @@ import Paper from '@material-ui/core/Paper';
 import EditIcon from '@material-ui/icons/Edit';
 import CircularProgress from '@material-ui/core/CircularProgress';
 
-import { ShipmentForm } from './components';
+import { ShipmentForm } from '../../common';
 
 class Content extends PureComponent {
   renderDetails = () => {
@@ -69,6 +69,7 @@ class Content extends PureComponent {
       editCargoClick,
       cancelCargoClick,
       deleteCargoClick,
+      handleDialogClose,
       handleCargoChange,
       handleCargoSubmit,
     } = this.props;
@@ -80,24 +81,23 @@ class Content extends PureComponent {
         <div style={styles.titleWrapper}>
           <div style={styles.title}>Shipment {shipment.id} Details</div>
         </div>
-        {
-          editIconClick
-            ? 
-              <ShipmentForm
-                {...shipment}
-                handleChange={handleChange}
-                handleSubmit={handleSubmit}
-                addCargoClick={addCargoClick}
-                selectedCargo={selectedCargo}
-                editCargoClick={editCargoClick}
-                toggleEditState={toggleEditState}
-                cancelCargoClick={cancelCargoClick}
-                deleteCargoClick={deleteCargoClick}
-                handleCargoChange={handleCargoChange}
-                handleCargoSubmit={handleCargoSubmit}
-              /> 
-            : this.renderDetails()
-        }
+        {this.renderDetails()}
+        <ShipmentForm
+          editMode
+          {...shipment}
+          open={editIconClick}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
+          addCargoClick={addCargoClick}
+          selectedCargo={selectedCargo}
+          editCargoClick={editCargoClick}
+          toggleEditState={toggleEditState}
+          cancelCargoClick={cancelCargoClick}
+          deleteCargoClick={deleteCargoClick}
+          handleDialogClose={handleDialogClose}
+          handleCargoChange={handleCargoChange}
+          handleCargoSubmit={handleCargoSubmit}
+        />
       </div>
     )
   }

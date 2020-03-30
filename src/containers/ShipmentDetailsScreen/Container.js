@@ -131,6 +131,10 @@ class ShipmentDetails extends Component {
     const { updateShipment } = this.props;
     const { shipment } = this.state;
     updateShipment(shipment);
+    this.handleDialogClose();
+  }
+
+  handleDialogClose= () => {
     this.toggleEditState('editIconClick', false);
   }
 
@@ -153,6 +157,7 @@ class ShipmentDetails extends Component {
         toggleEditState={this.toggleEditState}
         cancelCargoClick={this.cancelCargoClick}
         deleteCargoClick={this.deleteCargoClick}
+        handleDialogClose={this.handleDialogClose}
         handleCargoChange={this.handleCargoChange}
         handleCargoSubmit={this.handleCargoSubmit}
       />

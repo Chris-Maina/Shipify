@@ -15,40 +15,45 @@ const styles = {
     },
     innerBlock: {
         display: 'flex',
-        maxWidth: '40%',
+        padding: '0px 10px',
         alignItems: 'center',
         justifyContent: 'space-between',
         margin: '10px 0px',
 
     },
-    input: {
-        maxWidth: '40%'
+    typeInput: {
+        width: '30%',
+        marginRight: 10,
+    },
+    volumeInput: {
+        width: '20%',
+        marginLeft: 10,
     },
     buttonWrapper: {
-        display: 'flex',
-        marginTop: 20
+        justifyContent: 'center',
     },
     button: {
         marginLeft: 10,
-        width: '15%',
+        width: '20%',
     },
     cargoWrapper: {
-        maxWidth: '40%',
         display: 'flex',
         justifyContent: 'space-between'
     },
-    inputWrapper: {
+    addIcon: {
+        color: 'green',
+        marginRight: 10,
+    },
+    iconWrapper: {
         display: 'flex',
-        maxWidth: '55%',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        marginBottom: 20
+        paddingLeft: 15,
     },
     active: {
-        color: 'green'
+        color: 'green',
+        marginRight: 15,
     },
     danger: {
-        color: 'red'
+        color: 'red',
     }
 }
 

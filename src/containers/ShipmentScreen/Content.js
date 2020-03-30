@@ -1,66 +1,117 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
+import Button from '@material-ui/core/Button';
 import TableRow from '@material-ui/core/TableRow';
-import TextField from '@material-ui/core/TextField';
+import SearchIcon from '@material-ui/icons/Search';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
-import { makeStyles } from '@material-ui/core/styles';
+import OutlinedInput from '@material-ui/core/OutlinedInput';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
-import styles from './styles';
+import { ShipmentForm } from '../../common';
 
-const useStyles = makeStyles(styles);
-const Content = ({ shipments, handleShipmentClick, handleChange, searchTerm }) => {
-  const classes = useStyles();
+import styles from './styles';;
+
+const Content = ({
+  shipment,
+  shipments,
+  searchTerm,
+  handleChange,
+  handleSubmit,
+  addCargoClick,
+  selectedCargo,
+  editCargoClick,
+  toggleEditState,
+  cancelCargoClick,
+  deleteCargoClick,
+  handleCargoSubmit,
+  handleCargoChange,
+  handleDialogClose,
+  createFormVisible,
+  createShipmentClick,
+  handleShipmentClick,
+  handleShipmentFormChange,
+}) => {
+  const classes = styles();
   if (!shipments) {
     return (<Paper><div>There are no shipments</div></Paper>);
   }
 
   return (
-    <div style={styles.container}>
+    <div className={classes.container}>
       <div className={classes.titleWrapper}>
-        <div style={styles.title}>Shipments</div>
-        <TextField
+        <div className={classes.title}>Shipments</div>
+        <OutlinedInput
           value={searchTerm}
           name='searchTerm'
           onChange={handleChange}
           placeholder='Search shipment id'
-          variant='outlined'
-          className={classes.inputRoot}
+          classes={{
+            root: classes.inputRoot,
+            input: classes.inputInput
+          }}
+          startAdornment={
+            <InputAdornment position="start">
+              <SearchIcon />
+            </InputAdornment>
+          }
         />
+        <Button
+          color='primary'
+          variant='contained'
+          onClick={createShipmentClick}
+        >
+            Create Shipment
+        </Button>
       </div>
       <Paper>
 
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell style={styles.tableHead}>ID</TableCell>
-              <TableCell style={styles.tableHead}>Name</TableCell>
-              <TableCell style={styles.tableHead}>Origin</TableCell>
-              <TableCell style={styles.tableHead}>Destination</TableCell>
-              <TableCell style={styles.tableHead}>Mode</TableCell>
-              <TableCell style={styles.tableHead}>Total</TableCell>
-              <TableCell style={styles.tableHead}>Status</TableCell>
+              <TableCell className={classes.tableHead}>ID</TableCell>
+              <TableCell className={classes.tableHead}>Name</TableCell>
+              <TableCell className={classes.tableHead}>Origin</TableCell>
+              <TableCell className={classes.tableHead}>Destination</TableCell>
+              <TableCell className={classes.tableHead}>Mode</TableCell>
+              <TableCell className={classes.tableHead}>Total</TableCell>
+              <TableCell className={classes.tableHead}>Status</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {
-              shipments.map(shipment => (
-                <TableRow key={shipment.id} className={classes.tableRow} onClick={() => handleShipmentClick(shipment.id)}>
-                  <TableCell>{shipment.id}</TableCell>
-                  <TableCell>{shipment.name}</TableCell>
-                  <TableCell>{shipment.origin}</TableCell>
-                  <TableCell>{shipment.destination}</TableCell>
-                  <TableCell>{shipment.mode}</TableCell>
-                  <TableCell>{shipment.total}</TableCell>
-                  <TableCell style={styles[shipment.status.toLowerCase()]}>{shipment.status}</TableCell>
+              shipments.map(item => (
+                <TableRow key={item.id} className={classes.tableRow} onClick={() => handleShipmentClick(item.id)}>
+                  <TableCell>{item.id}</TableCell>
+                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{item.origin}</TableCell>
+                  <TableCell>{item.destination}</TableCell>
+                  <TableCell>{item.mode}</TableCell>
+                  <TableCell>{item.total}</TableCell>
+                  <TableCell className={classes[item.status.toLowerCase()]}>{item.status}</TableCell>
                 </TableRow>
               ))
             }
           </TableBody>
         </Table>
       </Paper>
+      <ShipmentForm
+        {...shipment}
+        open={createFormVisible}
+        handleSubmit={handleSubmit}
+        addCargoClick={addCargoClick}
+        selectedCargo={selectedCargo}
+        editCargoClick={editCargoClick}
+        toggleEditState={toggleEditState}
+        cancelCargoClick={cancelCargoClick}
+        deleteCargoClick={deleteCargoClick}
+        handleCargoSubmit={handleCargoSubmit}
+        handleCargoChange={handleCargoChange}
+        handleDialogClose={handleDialogClose}
+        handleChange={handleShipmentFormChange}
+      />
     </div>
   )
 }

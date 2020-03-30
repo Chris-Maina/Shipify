@@ -1,30 +1,37 @@
-const styles = {
+import { makeStyles } from '@material-ui/core/styles';
+
+const styles = makeStyles(theme => ({
   container: {
     paddingLeft: 20,
   },
   titleWrapper: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: 20,
   },
-  inputRoot: {
-    'input': {
-      fontSize: '14px',
-      ouline: 'none',
-      padding: '14px 10px',
-      backgroundColor: '#fff',
-      boxSizing: 'border-box'
-    }
-  },
-  searchField: {
-    fontSize: '14px',
-    marginLeft: 'auto'
-  },
   title: {
+    flexGrow: 1,
     fontWeight: 700,
     fontSize: 23,
     color: '#3f51b5'
+  },
+  searchIcon: {
+    height: '100%',
+    pointerEvents: 'none',
+    padding: theme.spacing(0, 2),
+  },
+  inputRoot: {
+    color: 'inherit',
+    marginRight: 20,
+    backgroundColor: theme.palette.common.white,
+  },
+  inputInput: {
+    fontSize: '14px',
+    boxSizing: 'border-box',
+    '&:focus': {
+      ouline: 'none',
+      borderColor: 'none',
+    }
   },
   shipmentWrapper: {
     marginTop: 20,
@@ -54,6 +61,6 @@ const styles = {
   active: {
     color: 'green'
   }
-}
+}))
 
 export default styles;

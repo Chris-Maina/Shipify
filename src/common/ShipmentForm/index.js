@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import Paper from '@material-ui/core/Paper';
 import Radio from '@material-ui/core/Radio';
 import Button from '@material-ui/core/Button';
+import Dialog from '@material-ui/core/Dialog';
 import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 import CancelIcon from '@material-ui/icons/Cancel';
@@ -9,6 +9,9 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from "@material-ui/core/TextField";
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from "@material-ui/core/FormControl";
+import DialogTitle from '@material-ui/core/DialogTitle';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 
@@ -23,11 +26,12 @@ class ShipmentForm extends PureComponent {
 			handleCargoSubmit,
 		} = this.props;
 		return (
-			<div style={styles.inputWrapper}>
+			<div style={styles.innerBlock}>
 				<TextField
-					variant="outlined"
-					placeholder='Type'
 					name='type'
+					variant="outlined"
+          placeholder='Type'
+          style={styles.typeInput}
 					value={selectedCargo.type}
 					onChange={handleCargoChange}
 				/>
@@ -35,7 +39,7 @@ class ShipmentForm extends PureComponent {
 					multiline
 					variant="outlined"
 					placeholder='Description'
-					name='description'
+          name='description'
 					value={selectedCargo.description}
 					onChange={handleCargoChange}
 				/>
@@ -43,40 +47,57 @@ class ShipmentForm extends PureComponent {
 					variant="outlined"
 					placeholder='Volume'
 					name='volume'
+          type='number'
+          style={styles.volumeInput}
 					value={selectedCargo.volume}
-					type='number'
 					onChange={handleCargoChange}
 				/>
-				<CheckIcon style={styles.active} onClick={handleCargoSubmit} />
-				<CancelIcon style={styles.danger} onClick={cancelCargoClick} />
+        <div style={styles.iconWrapper}>
+          <CheckIcon style={styles.active} onClick={handleCargoSubmit} />
+          <CancelIcon style={styles.danger} onClick={cancelCargoClick} />
+        </div>
 			</div>
 		)
 	}
 	render() {
 		const {
+			open,
 			name,
-			origin,
 			cargo,
 			total,
 			status,
+			origin,
+			editMode,
 			destination,
 			handleChange,
 			handleSubmit,
-			toggleEditState,
 			addCargoClick,
-			editCargoClick,
+      editCargoClick,
+			toggleEditState,
 			deleteCargoClick,
-		} = this.props;
+      handleDialogClose,
+    } = this.props;
+    let buttonText = 'Create';
+    let title = 'Create';
+    if (editMode) {
+      buttonText = 'Edit';
+      title = 'Edit';
+    }
 		return (
-			<div style={styles.container}>
-				<Paper style={styles.card}>
+      <Dialog 
+        fullWidth
+        open={open}
+        maxWidth='sm'
+        onClose={handleDialogClose} 
+      >
+				<DialogTitle>{title} Shipment</DialogTitle>
+				<DialogContent style={styles.card}>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Name</div>
 						<TextField
 							variant="outlined"
 							name='name'
 							value={name}
-							style={styles.input}
 							onChange={handleChange}
 						/>
 					</FormControl>
@@ -86,7 +107,6 @@ class ShipmentForm extends PureComponent {
 							variant="outlined"
 							name='origin'
 							value={origin}
-							style={styles.input}
 							onChange={handleChange}
 						/>
 					</FormControl>
@@ -96,25 +116,26 @@ class ShipmentForm extends PureComponent {
 							variant="outlined"
 							name='destination'
 							value={destination}
-							style={styles.input}
 							onChange={handleChange}
 						/>
 					</FormControl>
 					<FormControl>
 						<div style={styles.cargoWrapper}>
 							<div style={styles.label}>Cargo</div>
-							<AddCircleOutlineIcon style={styles.active} onClick={() => toggleEditState('addCargoClick', true)} />
+							<AddCircleOutlineIcon style={styles.addIcon} onClick={() => toggleEditState('addCargoClick', true)} />
 						</div>
 						{
-							cargo.map((el, index) => (
+							cargo.length ? cargo.map((el, index) => (
 								<div key={index} style={styles.innerBlock}>
 									<span>{el.type}</span>
 									<span>{el.description}</span>
 									<span>{el.volume}</span>
-									<EditIcon style={styles.active} onClick={() => editCargoClick(el, index)} />
-									<DeleteIcon style={styles.danger} onClick={() => deleteCargoClick(index)} />
+                  <div>
+                    <EditIcon style={styles.active} onClick={() => editCargoClick(el, index)} />
+                    <DeleteIcon style={styles.danger} onClick={() => deleteCargoClick(index)} />
+                  </div>
 								</div>
-							))
+							)) : null
 						}
 						{
 							addCargoClick && this.renderCargoInputFields()
@@ -127,7 +148,6 @@ class ShipmentForm extends PureComponent {
 							name='total'
 							value={total}
 							type='number'
-							style={styles.input}
 							onChange={handleChange}
 						/>
 					</FormControl>
@@ -139,12 +159,12 @@ class ShipmentForm extends PureComponent {
 							<FormControlLabel value="INACTIVE" control={<Radio />} label="Inactive" />
 						</RadioGroup>
 					</FormControl>
-					<div style={styles.buttonWrapper}>
-						<Button style={styles.button} variant="contained" color='primary' onClick={handleSubmit}>Update</Button>
-						<Button style={styles.button} variant="contained" onClick={() => toggleEditState('editIconClick', false)}>Cancel</Button>
-					</div>
-				</Paper>
-			</div>
+				</DialogContent>
+				<DialogActions style={styles.buttonWrapper}>
+					<Button style={styles.button} variant="contained" color='primary' onClick={handleSubmit}>{buttonText}</Button>
+					<Button style={styles.button} variant="contained" onClick={handleDialogClose}>Cancel</Button>
+				</DialogActions>
+			</Dialog>
 		);
 	}
 }
