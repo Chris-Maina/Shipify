@@ -62,7 +62,8 @@ class ShipmentForm extends PureComponent {
 	render() {
 		const {
 			open,
-			name,
+      name,
+      mode,
 			cargo,
 			total,
 			status,
@@ -150,6 +151,13 @@ class ShipmentForm extends PureComponent {
 							type='number'
 							onChange={handleChange}
 						/>
+					</FormControl>
+          <FormControl style={styles.block}>
+						<div style={styles.label}>Mode</div>
+						<RadioGroup row aria-label="mode" name='mode' value={mode} onChange={handleChange}>
+							<FormControlLabel value="air" control={<Radio />} label="Air" />
+							<FormControlLabel value="sea" control={<Radio />} label="Sea" />
+						</RadioGroup>
 					</FormControl>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Status</div>

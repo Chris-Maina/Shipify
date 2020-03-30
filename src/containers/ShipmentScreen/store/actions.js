@@ -4,7 +4,7 @@ export const fetchShipments = () => ({
   type: ACTION_TYPES.FETCH_SHIPMENTS_REQUEST,
 });
 
-export const updateShipment = (shipment) => ({
-  type: ACTION_TYPES.UPDATE_SHIPMENTS_REQUEST,
+export const createShipment = shipment => ({
+  type: ACTION_TYPES.CREATE_SHIPMENT_REQUEST,
   payload: { shipment }
 });

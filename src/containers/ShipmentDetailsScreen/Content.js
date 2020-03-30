@@ -48,6 +48,10 @@ class Content extends PureComponent {
             <div>{shipment.total}</div>
           </div>
           <div style={styles.block}>
+            <div style={styles.caption}>Mode</div>
+            <div>{shipment.mode}</div>
+          </div>
+          <div style={styles.block}>
             <div style={styles.caption}>Status</div>
             <div style={styles[shipment.status.toLowerCase()]}>{shipment.status}</div>
           </div>

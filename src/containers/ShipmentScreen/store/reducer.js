@@ -14,6 +14,11 @@ const shipmentReducer = (state=initialState, { type, payload }) => {
         loading: false,
         shipments: payload.shipments
       };
+    case ACTION_TYPES.CREATE_SHIPMENT_SUCCESS:
+      return {
+        ...state,
+        shipments: [payload.shipment, ...state.shipments]
+      };
     default:
       return state;
   }

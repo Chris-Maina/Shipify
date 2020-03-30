@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Content from './Content';
 
-import { search } from './helpers';
+import { search, getId } from './helpers';
 
 class ShipmentScreen extends Component {
   initialState = {
@@ -11,6 +11,7 @@ class ShipmentScreen extends Component {
       destination: '',
       total: '',
       cargo: [],
+      mode: '',
     },
     selectedCargo: {
       type: '',
@@ -136,9 +137,18 @@ class ShipmentScreen extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const { updateShipment } = this.props;
+    const { createShipment } = this.props;
     const { shipment } = this.state;
-    updateShipment(shipment);
+    const { shipments } = this.props;
+
+    const lastShipment = shipments[shipments.length-1];
+    const id = `S${getId(lastShipment.id.slice(1))}`;
+
+    createShipment({
+      id,
+      userId: lastShipment.userId,
+      ...shipment
+    });
     this.handleDialogClose();
   }
 
