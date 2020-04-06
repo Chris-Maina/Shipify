@@ -12,6 +12,7 @@ class ShipmentScreen extends Component {
       total: '',
       cargo: [],
       mode: '',
+      status: ''
     },
     selectedCargo: {
       type: '',
