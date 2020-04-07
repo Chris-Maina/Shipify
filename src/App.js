@@ -3,6 +3,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 const LoginScreen = lazy(() => import('./containers/LoginScreen'));
+const SignUpScreen = lazy(() => import('./containers/SignUpScreen'));
 const PageContainer = lazy(() => import('./containers/PageContainer'));
 const RedirectScreen = lazy(() => import('./containers/RedirectScreen'));
 const ShipmentScreen = lazy(() => import('./containers/ShipmentScreen'));
@@ -13,6 +14,7 @@ function App() {
     <BrowserRouter>
      <Suspense fallback={<CircularProgress style={{ margin: '0 auto', display: 'table', lineHeight: 40 }} />}>
       <Switch>
+        <Route exact path="/signup" component={SignUpScreen} />
         <Route exact path="/signin" component={LoginScreen} />
         <Route
           render={() => (

@@ -6,6 +6,7 @@ const text = {
 }
 const styles = theme => ({
     container: {
+        fontSize: 12,
         minHeight: '100vh',
         minWidth: '100vw',
         display: 'flex',
@@ -13,7 +14,7 @@ const styles = theme => ({
         justifyContent: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
-        backgroundImage: `url(${blueBackground})`
+        backgroundImage: `url(${blueBackground})`,
     },
     wrapper: {
         width: '70%',
@@ -41,7 +42,7 @@ const styles = theme => ({
     leftContent: {
         width: '100%',
         display: 'flex',
-        padding: '30px 0',
+        padding: '20px 0',
         alignItems: 'center',
         justifyContent: 'space-between',
         flexDirection: 'column',
@@ -51,7 +52,7 @@ const styles = theme => ({
     },
     titleWrapper: {
         textAlign: 'center',
-        marginBottom: 30,
+        marginBottom: 20,
     },
     title: {
         fontWeight: 'bold',
@@ -81,8 +82,7 @@ const styles = theme => ({
     },
     facebookIcon: {
         fontSize: 18,
-        marginRight: 24,
-        
+        marginRight: 24,  
     },
     googleBtn: {
         height: 36,
@@ -115,6 +115,12 @@ const styles = theme => ({
         width: '80%',
         flexDirection: 'column',
     },
+    formGroup: {
+        display: 'flex',
+        '& div': {
+            width: '95%'
+        }
+    },
     label: {
         marginLeft: 5,
         textTransform: 'uppercase',
@@ -131,7 +137,7 @@ const styles = theme => ({
     },
     formElement: {
         width: '100%',
-        marginBottom: 20,
+        marginBottom: 10,
     },
     loginButton: {
         width: '100%',
@@ -141,13 +147,6 @@ const styles = theme => ({
     createButton: {
         borderRadius: 14,
         backgroundColor: '#fff'
-    },
-    forgotPassTxt: {
-        ...text,
-        fontSize: 15,
-        textAlign: 'center',
-        marginBottom: 20,
-        textDecoration: 'none'
     },
     createAccWrapper: {
         width: '80%',
