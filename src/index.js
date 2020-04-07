@@ -12,6 +12,13 @@ import * as serviceWorker from './serviceWorker';
 const store = configureStore({});
 
 const theme = createMuiTheme({
+  overrides: {
+    MuiButton: {
+      root: {
+        minHeight: 36,
+      }
+    }
+  },
   typography: {
     fontFamily: [
       'Lato',
@@ -19,7 +26,24 @@ const theme = createMuiTheme({
       'Helvetica Neue',
       'Arial',
       'sans-serif'
-    ].join(',')
+    ].join(','),
+    fontSize: 14,
+  },
+  palette: {
+    primary: {
+      main: '#151537'
+    },
+    secondary: {
+      main: '#F58C55'
+    },
+    text: {
+      primary: '#151537',
+      secondary: '#F58C55'
+    },
+    background: {
+      paper: '#FEFEFD',
+      default: '#FEFEFD',
+    }
   }
 });
 /**
