@@ -8,7 +8,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 import styles from './styles';
 
-const SignUpScreenContent = ({ classes }) => {
+const SignUpScreenContent = ({ classes, redirectSignIn }) => {
     return (
         <div className={classes.container}>
             <Paper className={classes.wrapper}>
@@ -22,7 +22,7 @@ const SignUpScreenContent = ({ classes }) => {
                         {/* Social login */}
                         <Button
                             variant="contained"
-                            color='primary' 
+                            color='primary'
                             className={classes.facebookBtn}
                         >
                             <FacebookIcon className={classes.facebookIcon} />
@@ -78,15 +78,22 @@ const SignUpScreenContent = ({ classes }) => {
                                 input: classes.inputInput
                             }} type='password' />
                         </FormControl>
-                        <Button variant="contained" color='primary'  className={classes.loginButton}>Sign up</Button>
+                        <Button variant="contained" color='primary' className={classes.loginButton}>Sign up</Button>
                     </form>
                     <div className={classes.createAccWrapper}>
                         <div>Already have an account?</div>
-                        <Button className={classes.createButton} variant="outlined" color="secondary">Sign in</Button>
+                        <Button
+                            color="secondary"
+                            variant="outlined"
+                            onClick={redirectSignIn}
+                            className={classes.createButton}
+                        >
+                            Sign in
+                        </Button>
                     </div>
                 </div>
-                 {/* Left content */}
-                 <div className={classes.rightContent} />
+                {/* Left content */}
+                <div className={classes.rightContent} />
             </Paper>
         </div>
     )

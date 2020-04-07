@@ -8,7 +8,7 @@ import FacebookIcon from '@material-ui/icons/Facebook';
 
 import styles from './styles';
 
-const LoginScreenContent = ({ classes }) => {
+const LoginScreenContent = ({ classes, redirectToSignUp }) => {
     return (
         <div className={classes.container}>
             <Paper className={classes.wrapper}>
@@ -22,7 +22,7 @@ const LoginScreenContent = ({ classes }) => {
                         {/* Social login */}
                         <Button
                             variant="contained"
-                            color='primary' 
+                            color='primary'
                             className={classes.facebookBtn}
                         >
                             <FacebookIcon className={classes.facebookIcon} />
@@ -55,12 +55,19 @@ const LoginScreenContent = ({ classes }) => {
                                 input: classes.inputInput
                             }} type='password' />
                         </FormControl>
-                        <Button variant="contained" color='primary'  className={classes.loginButton}>Sign in</Button>
+                        <Button variant="contained" color='primary' className={classes.loginButton}>Sign in</Button>
                         <a href='/signup' className={classes.forgotPassTxt}>Forgot password?</a>
                     </form>
                     <div className={classes.createAccWrapper}>
                         <div>Don't have an account?</div>
-                        <Button className={classes.createButton} variant="outlined" color="secondary">Create now</Button>
+                        <Button
+                            className={classes.createButton}
+                            variant="outlined"
+                            color="secondary"
+                            onClick={redirectToSignUp}
+                        >
+                            Create now
+                        </Button>
                     </div>
                 </div>
                 {/* Left content */}

@@ -28,6 +28,7 @@ const styles = theme => ({
             display: 'block',
             backgroundSize: 'cover',
             backgroundRepeat: 'no-repeat',
+            backgroundPosition: 'center',
             backgroundImage: `url(${blueBackground})`
         },
     },
@@ -142,6 +143,7 @@ const styles = theme => ({
     loginButton: {
         width: '100%',
         borderRadius: 14,
+        marginTop: 10,
         marginBottom: 20
     },
     createButton: {
