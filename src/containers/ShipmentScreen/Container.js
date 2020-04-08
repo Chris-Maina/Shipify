@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Content from './Content';
 
 import { search, getId } from './helpers';
+import { isObjectEmpty } from '../../utils/validationHelper'
 
 class ShipmentScreen extends Component {
   initialState = {
@@ -92,6 +93,8 @@ class ShipmentScreen extends Component {
   handleCargoSubmit = () => {
     const { cargoIndex, shipment, selectedCargo } = this.state;
     
+    if (isObjectEmpty(selectedCargo)) return;
+
     if (cargoIndex === 0 || Boolean(cargoIndex)) {
       // edit mode
       shipment.cargo.splice(cargoIndex, 1, selectedCargo);
