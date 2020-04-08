@@ -43,17 +43,11 @@ const LoginScreenContent = ({ classes, redirectToSignUp }) => {
                     <form className={classes.formWrapper}>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label}>Email</label>
-                            <InputBase classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }} type='email' />
+                            <InputBase type='email' />
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Password</label>
-                            <InputBase classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }} type='password' />
+                            <InputBase type='password' />
                         </FormControl>
                         <Button variant="contained" color='primary' className={classes.loginButton}>Sign in</Button>
                         <a href='/signup' className={classes.forgotPassTxt}>Forgot password?</a>

@@ -6,7 +6,7 @@ import EditIcon from '@material-ui/icons/Edit';
 import CheckIcon from '@material-ui/icons/Check';
 import CancelIcon from '@material-ui/icons/Cancel';
 import DeleteIcon from '@material-ui/icons/Delete';
-import TextField from "@material-ui/core/TextField";
+import InputBase from '@material-ui/core/InputBase';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControl from "@material-ui/core/FormControl";
 import DialogTitle from '@material-ui/core/DialogTitle';
@@ -27,43 +27,40 @@ class ShipmentForm extends PureComponent {
 		} = this.props;
 		return (
 			<div style={styles.innerBlock}>
-				<TextField
+				<InputBase
 					name='type'
-					variant="outlined"
-          placeholder='Type'
-          style={styles.typeInput}
+					placeholder='Type'
+					style={styles.typeInput}
 					value={selectedCargo.type}
 					onChange={handleCargoChange}
 				/>
-				<TextField
-					multiline
-					variant="outlined"
+				<InputBase
+					// multiline
+					name='description'
 					placeholder='Description'
-          name='description'
 					value={selectedCargo.description}
 					onChange={handleCargoChange}
 				/>
-				<TextField
-					variant="outlined"
-					placeholder='Volume'
+				<InputBase
 					name='volume'
-          type='number'
-          style={styles.volumeInput}
+					type='number'
+					placeholder='Volume'
+					style={styles.volumeInput}
 					value={selectedCargo.volume}
 					onChange={handleCargoChange}
 				/>
-        <div style={styles.iconWrapper}>
-          <CheckIcon style={styles.active} onClick={handleCargoSubmit} />
-          <CancelIcon style={styles.danger} onClick={cancelCargoClick} />
-        </div>
+				<div style={styles.iconWrapper}>
+					<CheckIcon color='primary' style={styles.active} onClick={handleCargoSubmit} />
+					<CancelIcon color='error' onClick={cancelCargoClick} />
+				</div>
 			</div>
 		)
 	}
 	render() {
 		const {
 			open,
-      name,
-      mode,
+			name,
+			mode,
 			cargo,
 			total,
 			status,
@@ -73,30 +70,29 @@ class ShipmentForm extends PureComponent {
 			handleChange,
 			handleSubmit,
 			addCargoClick,
-      editCargoClick,
+			editCargoClick,
 			toggleEditState,
 			deleteCargoClick,
-      handleDialogClose,
-    } = this.props;
-    let buttonText = 'Create';
-    let title = 'Create';
-    if (editMode) {
-      buttonText = 'Edit';
-      title = 'Edit';
-    }
+			handleDialogClose,
+		} = this.props;
+		let buttonText = 'Create';
+		let title = 'Create';
+		if (editMode) {
+			buttonText = 'Edit';
+			title = 'Edit';
+		}
 		return (
-      <Dialog 
-        fullWidth
-        open={open}
-        maxWidth='sm'
-        onClose={handleDialogClose} 
-      >
-				<DialogTitle>{title} Shipment</DialogTitle>
+			<Dialog
+				fullWidth
+				open={open}
+				maxWidth='sm'
+				onClose={handleDialogClose}
+			>
+				<DialogTitle style={styles.title}>{title} Shipment</DialogTitle>
 				<DialogContent style={styles.card}>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Name</div>
-						<TextField
-							variant="outlined"
+						<InputBase
 							name='name'
 							value={name}
 							onChange={handleChange}
@@ -104,8 +100,7 @@ class ShipmentForm extends PureComponent {
 					</FormControl>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Origin</div>
-						<TextField
-							variant="outlined"
+						<InputBase
 							name='origin'
 							value={origin}
 							onChange={handleChange}
@@ -113,8 +108,7 @@ class ShipmentForm extends PureComponent {
 					</FormControl>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Destination</div>
-						<TextField
-							variant="outlined"
+						<InputBase
 							name='destination'
 							value={destination}
 							onChange={handleChange}
@@ -123,7 +117,11 @@ class ShipmentForm extends PureComponent {
 					<FormControl>
 						<div style={styles.cargoWrapper}>
 							<div style={styles.label}>Cargo</div>
-							<AddCircleOutlineIcon style={styles.addIcon} onClick={() => toggleEditState('addCargoClick', true)} />
+							<AddCircleOutlineIcon
+								color='primary'
+								style={styles.addIcon}
+								onClick={() => toggleEditState('addCargoClick', true)}
+							/>
 						</div>
 						{
 							cargo.length ? cargo.map((el, index) => (
@@ -131,10 +129,18 @@ class ShipmentForm extends PureComponent {
 									<span>{el.type}</span>
 									<span>{el.description}</span>
 									<span>{el.volume}</span>
-                  <div>
-                    <EditIcon style={styles.active} onClick={() => editCargoClick(el, index)} />
-                    <DeleteIcon style={styles.danger} onClick={() => deleteCargoClick(index)} />
-                  </div>
+									<div>
+										<EditIcon
+											color='primary'
+											style={styles.active} 
+											onClick={() => editCargoClick(el, index)}
+										/>
+										<DeleteIcon
+											color='error'
+										
+											onClick={() => deleteCargoClick(index)}
+										/>
+									</div>
 								</div>
 							)) : null
 						}
@@ -144,27 +150,26 @@ class ShipmentForm extends PureComponent {
 					</FormControl>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Total</div>
-						<TextField
-							variant="outlined"
+						<InputBase
 							name='total'
 							value={total}
 							type='number'
 							onChange={handleChange}
 						/>
 					</FormControl>
-          <FormControl style={styles.block}>
+					<FormControl style={styles.block}>
 						<div style={styles.label}>Mode</div>
 						<RadioGroup row aria-label="mode" name='mode' value={mode} onChange={handleChange}>
-							<FormControlLabel value="air" control={<Radio />} label="Air" />
-							<FormControlLabel value="sea" control={<Radio />} label="Sea" />
+							<FormControlLabel value="air" control={<Radio color='primary' />} label="Air" />
+							<FormControlLabel value="sea" control={<Radio color='primary' />} label="Sea" />
 						</RadioGroup>
 					</FormControl>
 					<FormControl style={styles.block}>
 						<div style={styles.label}>Status</div>
 						<RadioGroup row aria-label="status" name='status' value={status} onChange={handleChange}>
-							<FormControlLabel value="COMPLETED" control={<Radio />} label="Completed" />
-							<FormControlLabel value="ACTIVE" control={<Radio />} label="Active" />
-							<FormControlLabel value="INACTIVE" control={<Radio />} label="Inactive" />
+							<FormControlLabel value="COMPLETED" control={<Radio color='primary' />} label="Completed" />
+							<FormControlLabel value="ACTIVE" control={<Radio color='primary' />} label="Active" />
+							<FormControlLabel value="INACTIVE" control={<Radio color='primary' />} label="Inactive" />
 						</RadioGroup>
 					</FormControl>
 				</DialogContent>

@@ -17,6 +17,21 @@ const theme = createMuiTheme({
       root: {
         minHeight: 36,
       }
+    },
+    MuiInputBase: {
+      root: {
+        marginTop: 10,
+      },
+      input: {
+        borderRadius: 14,
+        padding: '10px 12px',
+        border: '1px solid #ced4da',
+      },
+    },
+    MuiRadio: {
+      root: {
+        color: '#151537'
+      }
     }
   },
   typography: {

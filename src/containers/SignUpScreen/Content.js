@@ -44,39 +44,24 @@ const SignUpScreenContent = ({ classes, redirectSignIn }) => {
                         <div className={classes.formGroup}>
                             <FormControl className={classes.formElement}>
                                 <label className={classes.label}>First name</label>
-                                <InputBase classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput
-                                }} />
+                                <InputBase />
                             </FormControl>
                             <FormControl className={classes.formElement}>
                                 <label className={classes.label}>Last name</label>
-                                <InputBase classes={{
-                                    root: classes.inputRoot,
-                                    input: classes.inputInput
-                                }} />
+                                <InputBase />
                             </FormControl>
                         </div>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label}>Email</label>
-                            <InputBase classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }} type='email' />
+                            <InputBase type='email' />
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Password</label>
-                            <InputBase classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }} type='password' />
+                            <InputBase type='password' />
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Confirm password</label>
-                            <InputBase classes={{
-                                root: classes.inputRoot,
-                                input: classes.inputInput
-                            }} type='password' />
+                            <InputBase type='password' />
                         </FormControl>
                         <Button variant="contained" color='primary' className={classes.loginButton}>Sign up</Button>
                     </form>

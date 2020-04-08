@@ -5,17 +5,19 @@ const styles = {
         display: 'flex',
         flexDirection: 'column'
     },
+    title: {
+        textAlign: 'center',
+    },
     label: {
         textTransform: 'uppercase',
-        marginBottom: 5,
-        fontWeight: 600,
+        marginLeft: 3,
     },
     block: {
         marginBottom: 20
     },
     innerBlock: {
         display: 'flex',
-        padding: '0px 10px',
+        paddingRight: 10,
         alignItems: 'center',
         justifyContent: 'space-between',
         margin: '10px 0px',
@@ -41,7 +43,6 @@ const styles = {
         justifyContent: 'space-between'
     },
     addIcon: {
-        color: 'green',
         marginRight: 10,
     },
     iconWrapper: {
@@ -49,12 +50,8 @@ const styles = {
         paddingLeft: 15,
     },
     active: {
-        color: 'green',
         marginRight: 15,
     },
-    danger: {
-        color: 'red',
-    }
-}
+};
 
 export default styles;

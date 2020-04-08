@@ -13,7 +13,6 @@ const styles = makeStyles(theme => ({
     flexGrow: 1,
     fontWeight: 700,
     fontSize: 23,
-    color: '#3f51b5'
   },
   searchIcon: {
     height: '100%',
@@ -27,6 +26,7 @@ const styles = makeStyles(theme => ({
   },
   inputInput: {
     fontSize: '14px',
+    border: 'none',
     boxSizing: 'border-box',
     '&:focus': {
       ouline: 'none',
