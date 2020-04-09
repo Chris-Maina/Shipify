@@ -7,31 +7,32 @@ const styles = theme => ({
   },
   toolBarTitle: {
     flexGrow: 1,
+    [theme.breakpoints.up('sm')]: {
+      marginLeft: theme.spacing(7),
+    },
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+  },
+  menuButton: {
+    marginRight: theme.spacing(2),
+    [theme.breakpoints.up('sm')]: {
+      display: 'none',
+    },
   },
   drawer: {
-    width: drawerWidth,
-    flexShrink: 0,
-    whiteSpace: 'nowrap',
+    [theme.breakpoints.up('sm')]: {
+      width: drawerWidth,
+      flexShrink: 0,
+      whiteSpace: 'nowrap',
+    },  
   },
-  drawerOpen: {
+  drawerPaper: {
     width: drawerWidth,
-    zIndex: theme.zIndex.appBar + 1,
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  drawerClose: {
-    transition: theme.transitions.create('width', {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    overflowX: 'hidden',
-    width: 0,
   },
   drawerContainer: {
     overflow: 'auto',
-    padding: '24px',
+    padding: '15px',
   },
   toolbar: {
     flexDirection: 'column',
