@@ -5,26 +5,8 @@ const styles = theme => ({
     minHeight: '100vh',
     margin: '0 auto',
   },
-  appBar: {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-  },
-  appBarShift: {
-    marginLeft: drawerWidth,
-    width: `calc(100% - ${drawerWidth}px)`,
-    transition: theme.transitions.create(['width', 'margin'], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  },
-  menuButton: {
-    marginRight: 36,
-  },
-  hide: {
-    display: 'none',
+  toolBarTitle: {
+    flexGrow: 1,
   },
   drawer: {
     width: drawerWidth,
@@ -33,6 +15,7 @@ const styles = theme => ({
   },
   drawerOpen: {
     width: drawerWidth,
+    zIndex: theme.zIndex.appBar + 1,
     transition: theme.transitions.create('width', {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.enteringScreen,
@@ -44,10 +27,40 @@ const styles = theme => ({
       duration: theme.transitions.duration.leavingScreen,
     }),
     overflowX: 'hidden',
-    width: theme.spacing(7) + 1,
-    [theme.breakpoints.up('sm')]: {
-      width: theme.spacing(9) + 1,
-    },
+    width: 0,
+  },
+  drawerContainer: {
+    overflow: 'auto',
+    padding: '24px',
+  },
+  toolbar: {
+    flexDirection: 'column',
+    justifyContent: 'center',
+    ...theme.mixins.toolbar,
+  },
+  avartar: {
+    width: theme.spacing(8),
+    height: theme.spacing(8),
+    backgroundColor: theme.palette.text.main
+  },
+  userName: {
+    fontSize: '18px',
+    fontWeight: 500,
+    lineHeight: '18px'
+  },
+  listItem: {
+    color: 'inherit',
+    display: 'inherit',
+    alignItems: 'inherit',
+    justifyContent: 'inherit',
+    textDecoration: 'inherit',
+    flexGrow: 1,
+  },
+  listItemIcon: {
+    minWidth: 46,
+  },
+  listItemText: {
+    fontWeight: 500,
   },
   content: {
     display: 'flex',
@@ -55,13 +68,6 @@ const styles = theme => ({
     background: '#f1f3f6',
     flexDirection: 'column',
     padding: theme.spacing(3),
-  },
-  toolbar: {
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    padding: '0 8px',
-    ...theme.mixins.toolbar,
   },
   pageContent: {
     flexGrow: 1,

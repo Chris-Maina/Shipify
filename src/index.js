@@ -32,6 +32,11 @@ const theme = createMuiTheme({
       root: {
         color: '#151537'
       }
+    },
+    MuiAvatar: {
+      colorDefault: {
+        backgroundColor: '#151537'
+      }
     }
   },
   typography: {

@@ -10,11 +10,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import LanguageIcon from '@material-ui/icons/Language';
+import PublicIcon from '@material-ui/icons/Public';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { withStyles } from '@material-ui/core/styles';
 import Divider from '@material-ui/core/Divider';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 
 import styles from './styles';
@@ -43,30 +43,23 @@ class Content extends PureComponent {
         <CssBaseline />
         <AppBar
           position="fixed"
-          className={clsx(classes.appBar, {
-            [classes.appBarShift]: open,
-          })}
         >
           <Toolbar>
+            <h3 className={classes.toolBarTitle}>SHIPIFY</h3>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
               onClick={() => this.toggleDrawerState(true)}
-              edge="start"
-              className={clsx(classes.menuButton, {
-                [classes.hide]: open,
-              })}
+              edge="end"
             >
               <MenuIcon />
             </IconButton>
-            <h3>SHIPIFY</h3>
           </Toolbar>
         </AppBar>
         <Drawer
-          variant="permanent"
           className={clsx(classes.drawer, {
             [classes.drawerOpen]: open,
-            [classes.drawerClose]: !open,
+            [classes.drawerClose]: !open
           })}
           classes={{
             paper: clsx({
@@ -75,21 +68,23 @@ class Content extends PureComponent {
             }),
           }}
           open={open}
+          onClose={() => this.toggleDrawerState(false)}
         >
-          <div className={classes.toolbar}>
-            <IconButton onClick={() => this.toggleDrawerState(false)}>
-              <ChevronLeftIcon />
-            </IconButton>
-          </div>
-          <Divider />
-          <List>
-            <Link to='/shipments' >
+          <div className={classes.drawerContainer}>
+            <Toolbar className={classes.toolbar}>
+              <Avatar className={classes.avartar}>CM</Avatar>
+              <h4 className={classes.userName}>Chris Maina</h4>
+            </Toolbar>
+            <Divider />
+            <List>
               <ListItem>
-                <ListItemIcon><LanguageIcon /></ListItemIcon>
-                <ListItemText primary="View Shipments" />
+                <Link className={classes.listItem} to='/shipments' >
+                  <ListItemIcon className={classes.listItemIcon}><PublicIcon /></ListItemIcon>
+                  <ListItemText classes={{ primary: classes.listItemText }} primary="Shipments" />
+                </Link>
               </ListItem>
-            </Link>
-          </List>
+            </List>
+          </div>
         </Drawer>
         <main className={classes.content}>
           <div className={classes.toolbar} />
