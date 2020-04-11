@@ -40,8 +40,10 @@ const styles = theme => ({
     ...theme.mixins.toolbar,
   },
   avartar: {
-    width: theme.spacing(8),
-    height: theme.spacing(8),
+    fontSize: '26px',
+    fontWeight: 'bold',
+    width: theme.spacing(7),
+    height: theme.spacing(7),
     backgroundColor: theme.palette.text.main
   },
   userName: {

@@ -19,6 +19,7 @@ import Avatar from '@material-ui/core/Avatar';
 import ListItem from '@material-ui/core/ListItem';
 
 import styles from './styles';
+import { capitalize } from '../../utils/helpers';
 
 class Content extends PureComponent {
   static propTypes = {
@@ -36,12 +37,44 @@ class Content extends PureComponent {
   toggleDrawerState = bool => {
     this.setState({ open: bool });
   }
+
+  getUserDetails = () => {
+    const { 
+      userInfo: {
+        email,
+        last_name: lastName,
+        first_name: firstName,
+      }
+    } = this.props;
+
+    const initals = email.charAt(0).toUpperCase();
+    let fullName = email;
+    if (firstName) {
+      fullName = capitalize(firstName);
+    } else if (lastName) {
+      fullName = `${fullName} ${capitalize(lastName)}`
+    }
+
+    return {
+      initals,
+      fullName
+    }
+  }
   /**
    * Drawer and this.props.children
   */
   render() {
-    const { classes } = this.props;
+    const { classes, logout, userInfo } = this.props;
     const { open } = this.state;
+
+    let userDetails = {
+      initals: null,
+      fullName: null,
+    }
+
+    if (userInfo) {
+      userDetails =  this.getUserDetails();
+    } 
 
     return (
       <div className={classes.root}>
@@ -64,7 +97,7 @@ class Content extends PureComponent {
             <IconButton
               color="inherit"
               aria-label="logout"
-              // onClick={() => this.toggleDrawerState(true)}
+              onClick={logout}
               edge="end"
             >
               <ExitToAppIcon />
@@ -88,8 +121,8 @@ class Content extends PureComponent {
           >
             <div className={classes.drawerContainer}>
               <Toolbar className={classes.toolbar}>
-                <Avatar className={classes.avartar}>CM</Avatar>
-                <h4 className={classes.userName}>Chris Maina</h4>
+                <Avatar className={classes.avartar}>{userDetails.initals}</Avatar>
+                <h4 className={classes.userName}>{userDetails.fullName}</h4>
               </Toolbar>
               <Divider />
               <List>
@@ -117,8 +150,8 @@ class Content extends PureComponent {
             <Toolbar />
             <div className={classes.drawerContainer}>
               <Toolbar className={classes.toolbar}>
-                <Avatar className={classes.avartar}>CM</Avatar>
-                <h4 className={classes.userName}>Chris Maina</h4>
+                <Avatar className={classes.avartar}>{userDetails.initals}</Avatar>
+                <h4 className={classes.userName}>{userDetails.fullName}</h4>
               </Toolbar>
               <Divider />
               <List>
