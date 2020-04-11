@@ -2,13 +2,21 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper'
 import Button from '@material-ui/core/Button';
 import InputBase from '@material-ui/core/InputBase';
-import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import withStyles from '@material-ui/core/styles/withStyles';
 
 import styles from './styles';
 
-const LoginScreenContent = ({ classes, redirectToSignUp }) => {
+const LoginScreenContent = ({
+    classes,
+    error,
+    email,
+    password,
+    handleChange,
+    handleSubmit,
+    redirectToSignUp
+}) => {
     return (
         <div className={classes.container}>
             <Paper className={classes.wrapper}>
@@ -40,16 +48,23 @@ const LoginScreenContent = ({ classes, redirectToSignUp }) => {
                         <span>OR</span>
                         <div className={classes.divider} />
                     </div>
-                    <form className={classes.formWrapper}>
+                    <form className={classes.formWrapper} onSubmit={handleSubmit}>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label}>Email</label>
-                            <InputBase type='email' />
+                            <InputBase type='email' name='email' value={email} onChange={handleChange} />
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Password</label>
-                            <InputBase type='password' />
+                            <InputBase type='password' name='password' value={password} onChange={handleChange} />
                         </FormControl>
-                        <Button variant="contained" color='primary' className={classes.loginButton}>Sign in</Button>
+                        <Button 
+                            color='primary'
+                            type='submit' 
+                            variant="contained" 
+                            className={classes.loginButton}
+                        >
+                            Sign in
+                        </Button>
                         <a href='/signup' className={classes.forgotPassTxt}>Forgot password?</a>
                     </form>
                     <div className={classes.createAccWrapper}>
