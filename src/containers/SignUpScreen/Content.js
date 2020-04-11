@@ -5,10 +5,22 @@ import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from '@material-ui/core/styles';
 import FormControl from '@material-ui/core/FormControl';
 import FacebookIcon from '@material-ui/icons/Facebook';
+import FormHelperText from '@material-ui/core/FormHelperText';
 
 import styles from './styles';
 
-const SignUpScreenContent = ({ classes, redirectSignIn }) => {
+const SignUpScreenContent = ({
+    email,
+    errors,
+    classes,
+    password,
+    lastName,
+    firstName,
+    handleSubmit,
+    handleChange,
+    redirectSignIn,
+    confirmPassword,
+}) => {
     return (
         <div className={classes.container}>
             <Paper className={classes.wrapper}>
@@ -40,30 +52,58 @@ const SignUpScreenContent = ({ classes, redirectSignIn }) => {
                         <span>OR</span>
                         <div className={classes.divider} />
                     </div>
-                    <form className={classes.formWrapper}>
+                    <form className={classes.formWrapper} onSubmit={handleSubmit}>
                         <div className={classes.formGroup}>
                             <FormControl className={classes.formElement}>
                                 <label className={classes.label}>First name</label>
-                                <InputBase />
+                                <InputBase name='firstName' value={firstName} onChange={handleChange} />
                             </FormControl>
                             <FormControl className={classes.formElement}>
                                 <label className={classes.label}>Last name</label>
-                                <InputBase />
+                                <InputBase name='lastName' value={lastName} onChange={handleChange} />
                             </FormControl>
                         </div>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label}>Email</label>
-                            <InputBase type='email' />
+                            <InputBase
+                                required
+                                type='email'
+                                name='email'
+                                value={email}
+                                onChange={handleChange}
+                            />
+                            {errors.email && <FormHelperText error={!!errors.email} >{errors.email}</FormHelperText>}
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Password</label>
-                            <InputBase type='password' />
+                            <InputBase
+                                required
+                                type='password'
+                                name='password'
+                                value={password}
+                                onChange={handleChange}
+                            />
                         </FormControl>
                         <FormControl className={classes.formElement}>
                             <label className={classes.label} htmlFor='password'>Confirm password</label>
-                            <InputBase type='password' />
+                            <InputBase
+                                required
+                                type='password'
+                                name='confirmPassword'
+                                value={confirmPassword}
+                                onChange={handleChange}
+                                error={!!errors.confirmPassword}
+                            />
+                            {errors.confirmPassword && <FormHelperText error={!!errors.confirmPassword} >{errors.confirmPassword}</FormHelperText>}
                         </FormControl>
-                        <Button variant="contained" color='primary' className={classes.loginButton}>Sign up</Button>
+                        <Button
+                            color='primary'
+                            type="submit"
+                            variant="contained"
+                            className={classes.loginButton}
+                        >
+                            Sign up
+                        </Button>
                     </form>
                     <div className={classes.createAccWrapper}>
                         <div>Already have an account?</div>
