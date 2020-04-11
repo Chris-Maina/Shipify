@@ -1,58 +1,37 @@
+import axios from 'axios';
 import config from '../config';
+import LocalStorage from '../utils/localStorage';
 
-const headers = {
-  'Content-Type': 'application/json',
-  Accept: 'application/json',
+axios.defaults.baseURL = config.API_BASE_URL;
+
+const addAuthorizationHeader = () => {
+  const token = LocalStorage.getUserToken();
+
+  if (token) {
+    axios.defaults.headers.common.Authorization = `Token ${token}`;
+  } else {
+    axios.defaults.headers.common.Authorization = '';
+  }
+}
+
+
+export const get = (path, requiresToken) => {
+  if (requiresToken) {
+    addAuthorizationHeader();
+  }
+  return axios.get(`/api/v1/${path}`);
 };
 
-const API_BASE_URL = config.API_BASE_URL;
-export const checkStatus = (response) => {
-  if (response.status >= 200 && response.status < 300) {
-    return response;
+export const post = (path, data, requiresToken) => {
+  if (requiresToken) {
+    addAuthorizationHeader();
   }
-  const error = {};
-  error.statusText = Error(response.statusText);
-  error.response = response;
-  throw error;
+  return axios.post(`/api/v1/${path}`, data);
 };
 
-export const get = async (path) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/${path}`, { headers });
-    const valid = checkStatus(response);
-    const result = await valid.json();
-    return result;
-  } catch (error) {
-    throw error;
+export const edit = async (path, data, requiresToken) => {
+  if (requiresToken) {
+    addAuthorizationHeader();
   }
-};
-
-export const post = async (path, data) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/${path}`, {
-      headers,
-      method: 'POST',
-      body: JSON.stringify(data),
-    });
-    const valid = checkStatus(response);
-    const result = await valid.json();
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
-
-export const edit = async (path, data) => {
-  try {
-    const response = await fetch(`${API_BASE_URL}/${path}`, {
-      headers,
-      method: 'PUT',
-      body: JSON.stringify(data),
-    });
-    const valid = checkStatus(response);
-    const result = await valid.json();
-    return result;
-  } catch (error) {
-    throw error;
-  }
+  return axios.patch(`/api/v1/${path}`, data);
 };
