@@ -7,10 +7,10 @@ function* fetchShipment({ payload }) {
 
   try {
     yield put({ type: ACTION_TYPES.SHIPMENT_DETAILS_PAGE_LOADING });
-    const result = yield call(get, `shipments/${shipmentId}`);
+    const result = yield call(get, `shipments/${shipmentId}`, true);
     yield put({
       type: ACTION_TYPES.FETCH_SHIPMENT_SUCCESS,
-      payload: { shipment: result }
+      payload: { shipment: result.data }
     });
   } catch (error) {
     yield put({
@@ -24,10 +24,10 @@ function* updateShipment({ payload }) {
   const { shipment } = payload;
   try {
     yield put({ type: ACTION_TYPES.SHIPMENT_DETAILS_PAGE_LOADING });
-    const result = yield call(edit, `shipments/${shipment.id}`, shipment);
+    const result = yield call(edit, `shipments/${shipment.id}`, shipment, true);
     yield put({
       type: ACTION_TYPES.UPDATE_SHIPMENT_SUCCESS,
-      payload: { shipment: result }
+      payload: { shipment: result.data }
     })
   } catch (error) {
     yield put({

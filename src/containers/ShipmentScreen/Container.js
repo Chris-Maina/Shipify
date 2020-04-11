@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Content from './Content';
 
-import { search, getId } from './helpers';
+import { search } from './helpers';
 import { isObjectEmpty } from '../../utils/validationHelper'
 
 class ShipmentScreen extends Component {
@@ -143,16 +143,8 @@ class ShipmentScreen extends Component {
     e.preventDefault();
     const { createShipment } = this.props;
     const { shipment } = this.state;
-    const { shipments } = this.props;
 
-    const lastShipment = shipments[shipments.length-1];
-    const id = `S${getId(lastShipment.id.slice(1))}`;
-
-    createShipment({
-      id,
-      userId: lastShipment.userId,
-      ...shipment
-    });
+    createShipment(shipment);
     this.handleDialogClose();
   }
 

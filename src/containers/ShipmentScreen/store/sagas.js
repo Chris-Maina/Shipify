@@ -4,10 +4,11 @@ import { get, post } from '../../../utils/api';
 
 function* fetchShipments() {
   try {
-    const result = yield call(get, 'shipments');
+    const result = yield call(get, 'shipments', true);
+    
     yield put({
       type: ACTION_TYPES.FETCH_SHIPMENTS_SUCCESS,
-      payload: { shipments: result }
+      payload: { shipments: result.data.shipments.sort((a, b) => (b.id-a.id)) }
     })
   } catch (error) {
     yield put({
@@ -20,10 +21,10 @@ function* fetchShipments() {
 function* createShipment({ payload }) {
   const { shipment } = payload;
   try {
-    const result = yield call(post, 'shipments', shipment);
+    const result = yield call(post, 'shipments', shipment, true);
     yield put({
       type: ACTION_TYPES.CREATE_SHIPMENT_SUCCESS,
-      payload: { shipment: result }
+      payload: { shipment: result.data.shipment }
     });
   } catch (error) {
     yield put({

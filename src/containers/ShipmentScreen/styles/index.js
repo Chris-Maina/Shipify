@@ -1,6 +1,4 @@
-import { makeStyles } from '@material-ui/core/styles';
-
-const styles = makeStyles(theme => ({
+const styles = theme => ({
   container: {
     paddingLeft: 20,
   },
@@ -33,6 +31,9 @@ const styles = makeStyles(theme => ({
       borderColor: 'none',
     }
   },
+  createBtn: {
+    marginTop: '10px'
+  },
   shipmentWrapper: {
     marginTop: 20,
     display: 'grid',
@@ -64,6 +65,7 @@ const styles = makeStyles(theme => ({
   mode: {
     textTransform: 'capitalize'
   }
-}))
+});
+
 
 export default styles;
